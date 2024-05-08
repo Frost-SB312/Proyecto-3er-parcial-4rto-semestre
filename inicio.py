@@ -564,7 +564,7 @@ def grado_avance_fagrega():
         conn.commit()
     return redirect(url_for('grado_avance'))
 
-#Habilidades
+#Habilidad
 
 @app.route('/habilidad')
 def habilidad():
@@ -613,6 +613,56 @@ def habilidad_fagrega():
         cursor.execute('insert into habilidad (descripcion) values (%s)',(desc))
         conn.commit()
     return redirect(url_for('habilidad'))
+
+#Idioma
+
+@app.route('/idioma')
+def idioma():
+    conn = pymysql.connect(host='localhost', user='root', passwd='', db='rh3' )
+    cursor = conn.cursor()
+    cursor.execute('select idIdioma, descripcion from idioma order by idIdioma')
+    datos = cursor.fetchall()
+    return render_template("idioma.html", comentarios = datos)
+
+@app.route('/idioma_editar/<string:id>')
+def idioma_editar(id):
+    conn = pymysql.connect(host='localhost', user='root', passwd='', db='rh3')
+    cursor = conn.cursor()
+    cursor.execute('select idIdioma, descripcion from idioma where idIdioma = %s', (id))
+    dato  = cursor.fetchall()
+    return render_template("idioma_edi.html", comentar=dato[0])
+
+@app.route('/idioma_fedita/<string:id>',methods=['POST'])
+def idioma_fedita(id):
+    if request.method == 'POST':
+        desc=request.form['descripcion']
+        conn = pymysql.connect(host='localhost', user='root', passwd='', db='rh3')
+        cursor = conn.cursor()
+        cursor.execute('update idioma set descripcion=%s where idIdioma=%s', (desc,id))
+        conn.commit()
+    return redirect(url_for('idioma'))
+
+@app.route('/idioma_borrar/<string:id>')
+def idioma_borrar(id):
+    conn = pymysql.connect(host='localhost', user='root', passwd='', db='rh3')
+    cursor = conn.cursor()
+    cursor.execute('delete from idioma where idIdioma = {0}'.format(id))
+    conn.commit()
+    return redirect(url_for('idioma'))
+
+@app.route('/idioma_agregar')
+def idioma_agregar():
+    return render_template("idioma_agr.html")
+
+@app.route('/idioma_fagrega', methods=['POST'])
+def idioma_fagrega():
+    if request.method == 'POST':
+        desc = request.form['descripcion']
+        conn = pymysql.connect(host='localhost', user='root', passwd='', db='rh3' )
+        cursor = conn.cursor()
+        cursor.execute('insert into idioma (descripcion) values (%s)',(desc))
+        conn.commit()
+    return redirect(url_for('idioma'))
 
 if __name__ == "__main__":
     app.run(debug=True)
