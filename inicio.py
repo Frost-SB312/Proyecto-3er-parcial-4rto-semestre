@@ -464,7 +464,55 @@ def escolaridad_fagrega():
         conn.commit()
     return redirect(url_for('escolaridad'))
 
+# Estado Civil
 
+@app.route('/estado_civil')
+def estado_civil():
+    conn = pymysql.connect(host='localhost', user='root', passwd='', db='rh3' )
+    cursor = conn.cursor()
+    cursor.execute('select idEstadoCivil, descripcion from estado_civil order by idEstadoCivil')
+    datos = cursor.fetchall()
+    return render_template("estado_civil.html", comentarios = datos)
+
+@app.route('/estado_civil_editar/<string:id>')
+def estado_civil_editar(id):
+    conn = pymysql.connect(host='localhost', user='root', passwd='', db='rh3')
+    cursor = conn.cursor()
+    cursor.execute('select idEstadoCivil, descripcion from estado_civil where idEstadoCivil = %s', (id))
+    dato  = cursor.fetchall()
+    return render_template("estado_civil_edi.html", comentar=dato[0])
+
+@app.route('/estado_civil_fedita/<string:id>',methods=['POST'])
+def estado_civil_fedita(id):
+    if request.method == 'POST':
+        desc=request.form['descripcion']
+        conn = pymysql.connect(host='localhost', user='root', passwd='', db='rh3')
+        cursor = conn.cursor()
+        cursor.execute('update estado_civil set descripcion=%s where idEstadoCivil=%s', (desc,id))
+        conn.commit()
+    return redirect(url_for('estado_civil'))
+
+@app.route('/estado_civil_borrar/<string:id>')
+def estado_civil_borrar(id):
+    conn = pymysql.connect(host='localhost', user='root', passwd='', db='rh3')
+    cursor = conn.cursor()
+    cursor.execute('delete from estado_civil where idEstadoCivil = {0}'.format(id))
+    conn.commit()
+    return redirect(url_for('estado_civil'))
+
+@app.route('/estado_civil_agregar')
+def estado_civil_agregar():
+    return render_template("estado_civil_agr.html")
+
+@app.route('/estado_civil_fagrega', methods=['POST'])
+def estado_civil_fagrega():
+    if request.method == 'POST':
+        desc = request.form['descripcion']
+        conn = pymysql.connect(host='localhost', user='root', passwd='', db='rh3' )
+        cursor = conn.cursor()
+        cursor.execute('insert into estado_civil (descripcion) values (%s)',(desc))
+        conn.commit()
+    return redirect(url_for('estado_civil'))
 
 if __name__ == "__main__":
     app.run(debug=True)
