@@ -424,7 +424,7 @@ def escolaridad():
     datos = cursor.fetchall()
     return render_template("escolaridad.html", comentarios = datos)
 
-@app.route('escolaridad_editar/<string:id>')
+@app.route('/escolaridad_editar/<string:id>')
 def escolaridad_editar(id):
     conn = pymysql.connect(host='localhost', user='root', passwd='', db='rh3')
     cursor = conn.cursor()
