@@ -514,5 +514,55 @@ def estado_civil_fagrega():
         conn.commit()
     return redirect(url_for('estado_civil'))
 
+#Grado de avance
+
+@app.route('/grado_avance')
+def grado_avance():
+    conn = pymysql.connect(host='localhost', user='root', passwd='', db='rh3' )
+    cursor = conn.cursor()
+    cursor.execute('select idGradoAvance, descripcion from grado_avance order by idGradoAvance')
+    datos = cursor.fetchall()
+    return render_template("grado_avance.html", comentarios = datos)
+
+@app.route('/grado_avance_editar/<string:id>')
+def grado_avance_editar(id):
+    conn = pymysql.connect(host='localhost', user='root', passwd='', db='rh3')
+    cursor = conn.cursor()
+    cursor.execute('select idGradoAvance, descripcion from grado_avance where idGrado_avance = %s', (id))
+    dato  = cursor.fetchall()
+    return render_template("grado_avance_edi.html", comentar=dato[0])
+
+@app.route('/grado_avance_fedita/<string:id>',methods=['POST'])
+def grado_avance_fedita(id):
+    if request.method == 'POST':
+        desc=request.form['descripcion']
+        conn = pymysql.connect(host='localhost', user='root', passwd='', db='rh3')
+        cursor = conn.cursor()
+        cursor.execute('update grado_avance set descripcion=%s where idGrado_avance=%s', (desc,id))
+        conn.commit()
+    return redirect(url_for('grado_avance'))
+
+@app.route('/grado_avance_borrar/<string:id>')
+def grado_avance_borrar(id):
+    conn = pymysql.connect(host='localhost', user='root', passwd='', db='rh3')
+    cursor = conn.cursor()
+    cursor.execute('delete from grado_avance where idGradoAvance = {0}'.format(id))
+    conn.commit()
+    return redirect(url_for('grado_avance'))
+
+@app.route('/grado_avance_agregar')
+def grado_avance_agregar():
+    return render_template("grado_avance_agr.html")
+
+@app.route('/grado_avance_fagrega', methods=['POST'])
+def grado_avance_fagrega():
+    if request.method == 'POST':
+        desc = request.form['descripcion']
+        conn = pymysql.connect(host='localhost', user='root', passwd='', db='rh3' )
+        cursor = conn.cursor()
+        cursor.execute('insert into grado_avance (descripcion) values (%s)',(desc))
+        conn.commit()
+    return redirect(url_for('grado_avance'))
+
 if __name__ == "__main__":
     app.run(debug=True)
