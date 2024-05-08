@@ -564,5 +564,55 @@ def grado_avance_fagrega():
         conn.commit()
     return redirect(url_for('grado_avance'))
 
+#Habilidades
+
+@app.route('/habilidad')
+def habilidad():
+    conn = pymysql.connect(host='localhost', user='root', passwd='', db='rh3' )
+    cursor = conn.cursor()
+    cursor.execute('select idHabilidad, descripcion from habilidad order by idHabilidad')
+    datos = cursor.fetchall()
+    return render_template("habilidad.html", comentarios = datos)
+
+@app.route('/habilidad_editar/<string:id>')
+def habilidad_editar(id):
+    conn = pymysql.connect(host='localhost', user='root', passwd='', db='rh3')
+    cursor = conn.cursor()
+    cursor.execute('select idHabilidad, descripcion from habilidad where idHabilidad = %s', (id))
+    dato  = cursor.fetchall()
+    return render_template("habilidad_edi.html", comentar=dato[0])
+
+@app.route('/habilidad_fedita/<string:id>',methods=['POST'])
+def habilidad_fedita(id):
+    if request.method == 'POST':
+        desc=request.form['descripcion']
+        conn = pymysql.connect(host='localhost', user='root', passwd='', db='rh3')
+        cursor = conn.cursor()
+        cursor.execute('update habilidad set descripcion=%s where idHabilidad=%s', (desc,id))
+        conn.commit()
+    return redirect(url_for('habilidad'))
+
+@app.route('/habilidad_borrar/<string:id>')
+def habilidad_borrar(id):
+    conn = pymysql.connect(host='localhost', user='root', passwd='', db='rh3')
+    cursor = conn.cursor()
+    cursor.execute('delete from habilidad where idHabilidad = {0}'.format(id))
+    conn.commit()
+    return redirect(url_for('habilidad'))
+
+@app.route('/habilidad_agregar')
+def habilidad_agregar():
+    return render_template("habilidad_agr.html")
+
+@app.route('/habilidad_fagrega', methods=['POST'])
+def habilidad_fagrega():
+    if request.method == 'POST':
+        desc = request.form['descripcion']
+        conn = pymysql.connect(host='localhost', user='root', passwd='', db='rh3' )
+        cursor = conn.cursor()
+        cursor.execute('insert into habilidad (descripcion) values (%s)',(desc))
+        conn.commit()
+    return redirect(url_for('habilidad'))
+
 if __name__ == "__main__":
     app.run(debug=True)
