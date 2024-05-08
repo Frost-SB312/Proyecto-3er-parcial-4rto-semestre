@@ -414,6 +414,57 @@ def carrera_fagrega():
         conn.commit()
     return redirect(url_for('carrera'))
 
+# Escolaridad
+
+@app.route('/escolaridad')
+def escolaridad():
+    conn = pymysql.connect(host='localhost', user='root', passwd='', db='rh3' )
+    cursor = conn.cursor()
+    cursor.execute('select idEscolaridad, descripcion from escolaridad order by idEscolaridad')
+    datos = cursor.fetchall()
+    return render_template("escolaridad.html", comentarios = datos)
+
+@app.route('escolaridad_editar/<string:id>')
+def escolaridad_editar(id):
+    conn = pymysql.connect(host='localhost', user='root', passwd='', db='rh3')
+    cursor = conn.cursor()
+    cursor.execute('select idEscolaridad, descripcion from escolaridad where idEscolaridad = %s', (id))
+    dato  = cursor.fetchall()
+    return render_template("escolaridad_edi.html", comentar=dato[0])
+
+@app.route('/escolaridad_fedita/<string:id>',methods=['POST'])
+def escolaridad_fedita(id):
+    if request.method == 'POST':
+        desc=request.form['descripcion']
+        conn = pymysql.connect(host='localhost', user='root', passwd='', db='rh3')
+        cursor = conn.cursor()
+        cursor.execute('update escolaridad set descripcion=%s where idEscolaridad=%s', (desc,id))
+        conn.commit()
+    return redirect(url_for('escolaridad'))
+
+@app.route('/escolaridad_borrar/<string:id>')
+def escolaridad_borrar(id):
+    conn = pymysql.connect(host='localhost', user='root', passwd='', db='rh3')
+    cursor = conn.cursor()
+    cursor.execute('delete from escolaridad where idEscolaridad = {0}'.format(id))
+    conn.commit()
+    return redirect(url_for('escolaridad'))
+
+@app.route('/escolaridad_agregar')
+def escolaridad_agregar():
+    return render_template("escolaridad_agr.html")
+
+@app.route('/escolaridad_fagrega', methods=['POST'])
+def escolaridad_fagrega():
+    if request.method == 'POST':
+        desc = request.form['descripcion']
+        conn = pymysql.connect(host='localhost', user='root', passwd='', db='rh3' )
+        cursor = conn.cursor()
+        cursor.execute('insert into escolaridad (descripcion) values (%s)',(desc))
+        conn.commit()
+    return redirect(url_for('escolaridad'))
+
+
 
 if __name__ == "__main__":
     app.run(debug=True)
