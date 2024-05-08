@@ -362,7 +362,57 @@ def puesto_fedita(idP):
             conn.commit()
     return redirect(url_for('puesto'))
 
+#Inicia modificaciones de los catalogos con CRUD
 
+#Carrera
+
+@app.route('/carrera')
+def carrera():
+    conn = pymysql.connect(host='localhost', user='root', passwd='', db='rh3' )
+    cursor = conn.cursor()
+    cursor.execute('select idCarrera, descripcion from carrera order by idCarrera')
+    datos = cursor.fetchall()
+    return render_template("carrera.html", comentarios = datos)
+
+@app.route('/carrera_editar/<string:id>')
+def carrera_editar(id):
+    conn = pymysql.connect(host='localhost', user='root', passwd='', db='rh3')
+    cursor = conn.cursor()
+    cursor.execute('select idCarrera, descripcion from carrera where idCarrera = %s', (id))
+    dato  = cursor.fetchall()
+    return render_template("carrera_edi.html", comentar=dato[0])
+
+@app.route('/carrera_fedita/<string:id>',methods=['POST'])
+def carrera_fedita(id):
+    if request.method == 'POST':
+        desc=request.form['descripcion']
+        conn = pymysql.connect(host='localhost', user='root', passwd='', db='rh3')
+        cursor = conn.cursor()
+        cursor.execute('update carrera set descripcion=%s where idCarrera=%s', (desc,id))
+        conn.commit()
+    return redirect(url_for('carrera'))
+
+@app.route('/carrera_borrar/<string:id>')
+def carrera_borrar(id):
+    conn = pymysql.connect(host='localhost', user='root', passwd='', db='rh3')
+    cursor = conn.cursor()
+    cursor.execute('delete from carrera where idCarrera = {0}'.format(id))
+    conn.commit()
+    return redirect(url_for('carrera'))
+
+@app.route('/carrera_agregar')
+def carrera_agregar():
+    return render_template("carrera_agr.html")
+
+@app.route('/carrera_fagrega', methods=['POST'])
+def carrera_fagrega():
+    if request.method == 'POST':
+        desc = request.form['descripcion']
+        conn = pymysql.connect(host='localhost', user='root', passwd='', db='rh3' )
+        cursor = conn.cursor()
+        cursor.execute('insert into carrera (descripcion) values (%s)',(desc))
+        conn.commit()
+    return redirect(url_for('carrera'))
 
 
 if __name__ == "__main__":
