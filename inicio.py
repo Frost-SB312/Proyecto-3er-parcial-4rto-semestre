@@ -514,5 +514,155 @@ def estado_civil_fagrega():
         conn.commit()
     return redirect(url_for('estado_civil'))
 
+#Grado de avance
+
+@app.route('/grado_avance')
+def grado_avance():
+    conn = pymysql.connect(host='localhost', user='root', passwd='', db='rh3' )
+    cursor = conn.cursor()
+    cursor.execute('select idGradoAvance, descripcion from grado_avance order by idGradoAvance')
+    datos = cursor.fetchall()
+    return render_template("grado_avance.html", comentarios = datos)
+
+@app.route('/grado_avance_editar/<string:id>')
+def grado_avance_editar(id):
+    conn = pymysql.connect(host='localhost', user='root', passwd='', db='rh3')
+    cursor = conn.cursor()
+    cursor.execute('select idGradoAvance, descripcion from grado_avance where idGrado_avance = %s', (id))
+    dato  = cursor.fetchall()
+    return render_template("grado_avance_edi.html", comentar=dato[0])
+
+@app.route('/grado_avance_fedita/<string:id>',methods=['POST'])
+def grado_avance_fedita(id):
+    if request.method == 'POST':
+        desc=request.form['descripcion']
+        conn = pymysql.connect(host='localhost', user='root', passwd='', db='rh3')
+        cursor = conn.cursor()
+        cursor.execute('update grado_avance set descripcion=%s where idGrado_avance=%s', (desc,id))
+        conn.commit()
+    return redirect(url_for('grado_avance'))
+
+@app.route('/grado_avance_borrar/<string:id>')
+def grado_avance_borrar(id):
+    conn = pymysql.connect(host='localhost', user='root', passwd='', db='rh3')
+    cursor = conn.cursor()
+    cursor.execute('delete from grado_avance where idGradoAvance = {0}'.format(id))
+    conn.commit()
+    return redirect(url_for('grado_avance'))
+
+@app.route('/grado_avance_agregar')
+def grado_avance_agregar():
+    return render_template("grado_avance_agr.html")
+
+@app.route('/grado_avance_fagrega', methods=['POST'])
+def grado_avance_fagrega():
+    if request.method == 'POST':
+        desc = request.form['descripcion']
+        conn = pymysql.connect(host='localhost', user='root', passwd='', db='rh3' )
+        cursor = conn.cursor()
+        cursor.execute('insert into grado_avance (descripcion) values (%s)',(desc))
+        conn.commit()
+    return redirect(url_for('grado_avance'))
+
+#Habilidad
+
+@app.route('/habilidad')
+def habilidad():
+    conn = pymysql.connect(host='localhost', user='root', passwd='', db='rh3' )
+    cursor = conn.cursor()
+    cursor.execute('select idHabilidad, descripcion from habilidad order by idHabilidad')
+    datos = cursor.fetchall()
+    return render_template("habilidad.html", comentarios = datos)
+
+@app.route('/habilidad_editar/<string:id>')
+def habilidad_editar(id):
+    conn = pymysql.connect(host='localhost', user='root', passwd='', db='rh3')
+    cursor = conn.cursor()
+    cursor.execute('select idHabilidad, descripcion from habilidad where idHabilidad = %s', (id))
+    dato  = cursor.fetchall()
+    return render_template("habilidad_edi.html", comentar=dato[0])
+
+@app.route('/habilidad_fedita/<string:id>',methods=['POST'])
+def habilidad_fedita(id):
+    if request.method == 'POST':
+        desc=request.form['descripcion']
+        conn = pymysql.connect(host='localhost', user='root', passwd='', db='rh3')
+        cursor = conn.cursor()
+        cursor.execute('update habilidad set descripcion=%s where idHabilidad=%s', (desc,id))
+        conn.commit()
+    return redirect(url_for('habilidad'))
+
+@app.route('/habilidad_borrar/<string:id>')
+def habilidad_borrar(id):
+    conn = pymysql.connect(host='localhost', user='root', passwd='', db='rh3')
+    cursor = conn.cursor()
+    cursor.execute('delete from habilidad where idHabilidad = {0}'.format(id))
+    conn.commit()
+    return redirect(url_for('habilidad'))
+
+@app.route('/habilidad_agregar')
+def habilidad_agregar():
+    return render_template("habilidad_agr.html")
+
+@app.route('/habilidad_fagrega', methods=['POST'])
+def habilidad_fagrega():
+    if request.method == 'POST':
+        desc = request.form['descripcion']
+        conn = pymysql.connect(host='localhost', user='root', passwd='', db='rh3' )
+        cursor = conn.cursor()
+        cursor.execute('insert into habilidad (descripcion) values (%s)',(desc))
+        conn.commit()
+    return redirect(url_for('habilidad'))
+
+#Idioma
+
+@app.route('/idioma')
+def idioma():
+    conn = pymysql.connect(host='localhost', user='root', passwd='', db='rh3' )
+    cursor = conn.cursor()
+    cursor.execute('select idIdioma, descripcion from idioma order by idIdioma')
+    datos = cursor.fetchall()
+    return render_template("idioma.html", comentarios = datos)
+
+@app.route('/idioma_editar/<string:id>')
+def idioma_editar(id):
+    conn = pymysql.connect(host='localhost', user='root', passwd='', db='rh3')
+    cursor = conn.cursor()
+    cursor.execute('select idIdioma, descripcion from idioma where idIdioma = %s', (id))
+    dato  = cursor.fetchall()
+    return render_template("idioma_edi.html", comentar=dato[0])
+
+@app.route('/idioma_fedita/<string:id>',methods=['POST'])
+def idioma_fedita(id):
+    if request.method == 'POST':
+        desc=request.form['descripcion']
+        conn = pymysql.connect(host='localhost', user='root', passwd='', db='rh3')
+        cursor = conn.cursor()
+        cursor.execute('update idioma set descripcion=%s where idIdioma=%s', (desc,id))
+        conn.commit()
+    return redirect(url_for('idioma'))
+
+@app.route('/idioma_borrar/<string:id>')
+def idioma_borrar(id):
+    conn = pymysql.connect(host='localhost', user='root', passwd='', db='rh3')
+    cursor = conn.cursor()
+    cursor.execute('delete from idioma where idIdioma = {0}'.format(id))
+    conn.commit()
+    return redirect(url_for('idioma'))
+
+@app.route('/idioma_agregar')
+def idioma_agregar():
+    return render_template("idioma_agr.html")
+
+@app.route('/idioma_fagrega', methods=['POST'])
+def idioma_fagrega():
+    if request.method == 'POST':
+        desc = request.form['descripcion']
+        conn = pymysql.connect(host='localhost', user='root', passwd='', db='rh3' )
+        cursor = conn.cursor()
+        cursor.execute('insert into idioma (descripcion) values (%s)',(desc))
+        conn.commit()
+    return redirect(url_for('idioma'))
+
 if __name__ == "__main__":
     app.run(debug=True)
