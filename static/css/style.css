@@ -32,18 +32,26 @@
     background-color: rgba(0, 0, 0, 0.7);
     border-color:#010052;
     border-radius: 20px;
+    text-align: center;
+    align-content: center;
 }
 
+
 .margTabla{
-    margin-top: 40px;
     padding: 120px;
+    margin-bottom:auto;
 }
 
 #tablar {
     border-collapse: collapse;
     border-spacing: 0;
     border: 2px solid #000; 
-    border-radius: 20px;
+    font-family: 'Courier New', Courier, monospace;
+    @font-face {
+        font-family: 'fuente';
+        src: url(/static/fuente/Callingstone.ttf);
+    }
+    
 }
 
 #tablar td, #tablar th {
@@ -61,7 +69,14 @@
 
 
 body{
+    margin:0;
+    padding: 0;
+    height: 100vh;
     background-image: url(/static/imagenes/fondos-de-pantalla-3d-paisaje.jpg);
     background-repeat: no-repeat;
+    background-size: cover;
     background-attachment: fixed;
+    backdrop-filter: blur(5px);
+    background-position: center;
+    
 }
