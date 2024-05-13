@@ -509,3 +509,16 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+ --
+ -- Catalogo de sexo para formulario de candidato
+ --
+CREATE TABLE IF NOT EXISTS `sexo`(
+`idSexo` int(2) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+`descripcion` varchar(20) NOT NULL
+);
+
+INSERT INTO `sexo` (`descripcion`) values
+('Masculino'),
+('Femenino'),
+('Indistinto');
