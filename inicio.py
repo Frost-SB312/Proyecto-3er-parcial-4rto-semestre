@@ -685,14 +685,11 @@ def login():
         admin = cursor.fetchone()
 
     if admin:
-        return redirect(url_for('cvacante'))
+        return redirect(url_for('vacante'))
         
     else:
         return "Acceso denegado. Por favor, verifica tu nombre de usuario y contraseña. <a href='/'>Volver al inicio</a>"
 
-@app.route('/cvacante')
-def cvacante():
-    return render_template('vacante.html')
 
 #Vacante#
 @app.route('/registrovacan', methods=['POST'])
