@@ -525,7 +525,7 @@ INSERT INTO `sexo` (`descripcion`) values
 
 CREATE TABLE IF NOT EXISTS `admins`(
 `idad` int(2) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-`nombre` varchar(50) NOT NULL
+`nombre` varchar(50) NOT NULL,
 `contraseña` varchar(50) NOT NULL
 );
 
