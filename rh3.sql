@@ -523,5 +523,5 @@ INSERT INTO `sexo` (`descripcion`) values
 ('Femenino'),
 ('Indistinto');
 
-create table admins (id int(1),nombre varchar(50),contraseña varchar (50));
+create table admins (id int(2),nombre varchar(50),contraseña varchar (50));
 insert into admins (id ,nombre,contraseña) values (1,"Octavio Emilio Martinez Fonseca","123"),(2,"Diego Samuel Aguila Duron","456"),(3,"Ramiro Trujillo Ramirez","789");
