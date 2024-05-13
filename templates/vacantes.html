@@ -1,0 +1,50 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<div class="row">
+  <div class="col-12">
+    <section id="tablaar" class="container">
+      <table id="tablar" class="margTabla" width="100%" border="1" cellpadding="0" bordercolor="#000000">
+        <tbody>
+          <tr>
+            <td color="FFFFFF" bgcolor="lightblue" valign="top">
+              <right><h3><a href="/vacante_agregar">Agregar VACANTE</a></h3></right>
+              <center><h3>VACANTES REGISTRADAS</h3></center>
+              <table width="100%" border="1" cellpadding="0" bordercolor="#000000">
+                <thead>
+                  <tr>
+                    <td bgcolor="white">ID</td>
+                    <td bgcolor="white">ConseVR</td>
+                    <td bgcolor="white">Fuente del Candidato</td>
+                    <td bgcolor="white">Inicio de la fecha de publicación</td>
+                    <td bgcolor="white">Fin de la fecha de publicación</td>
+                    <td bgcolor="white">Publicada</td>
+                    <td bgcolor="white">Observaciones</td>
+                    <td bgcolor="white">Candidato Seleccionado</td>
+                    <td bgcolor="white">Fecha de Contratación</td>
+                    <td bgcolor="white">ID de la Requisición</td>
+                    <td bgcolor="white">ID del Puesto</td>
+                    <td bgcolor="white"></td>
+                    <td bgcolor="white"></td>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for i in comentarios %}
+                  <tr>
+                    <td>{{i.0}}</td>
+                    <td bgcolor="#2B2D83"><center><a href="/vacante_editar/{{i.0}}" style="...">Editar</a></center></td>
+                    <td bgcolor="#3C3EC5"><center><a href="/vacante_borrar/{{i.0}}" style="...">Borrar</a></center></td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  </div>
+</div>
+
+{% endblock %}
