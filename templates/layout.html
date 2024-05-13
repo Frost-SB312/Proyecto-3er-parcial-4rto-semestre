@@ -28,7 +28,19 @@
                        <li><a class="dropdown-item" href="/puesto">PUESTO</a></li>
                        <li><a class="dropdown-item" href="/">REQUISICIÓN</a></li>
                        <li><a class="dropdown-item" href="/">VACANTES</a></li>
-	               <li><a class="dropdown-item" href="/">CANDIDATOS</a></li>
+                       <!--<li><a class="dropdown-item" href="/cvacante">CREAR VACANTE</a></li>-->
+                       <li><a id="crear_vacante_link" class="dropdown-item" href="/cvacante">CREAR VACANTE</a></li>
+                       <script>
+                        document.addEventListener("DOMContentLoaded", function() {
+                            document.getElementById("crear_vacante_link").addEventListener("click", function(event) {
+                                event.preventDefault(); // Evita el comportamiento predeterminado del enlace
+                        
+                                // Abre la ventana emergente
+                                var popup = window.open('/login_form');
+                            });
+                        });
+                        </script>
+	                    <li><a class="dropdown-item" href="/">CANDIDATOS</a></li>
                    </ul>
                 </li>
            </div>

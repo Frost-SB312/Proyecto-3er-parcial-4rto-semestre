@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<body>
+    <h2>Iniciar sesión</h2>
+    <form action="/login" method="POST">
+        <label for="nombre">Nombre:</label><br>
+        <input type="text" id="nombre" name="nombre"><br>
+        <label for="contraseña">Contraseña:</label><br>
+        <input type="password" id="contraseña" name="contraseña"><br><br>
+        <input type="submit" value="Iniciar sesión">
+        
+    </form>
+</body>
+{% endblock %}
