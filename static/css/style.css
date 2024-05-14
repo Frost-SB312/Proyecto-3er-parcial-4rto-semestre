@@ -28,17 +28,25 @@
 }
 
 #tablaar{
-    padding-block: 20px;
+   /* padding-block: 20px;
     background-color: rgba(0, 0, 0, 0.7);
     border-color:#010052;
     border-radius: 20px;
     text-align: center;
-    align-content: center;
+    align-content: center;*/
+
+
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.7);
+    border-color: #010052;
+    border-radius: 20px;
+    text-align: center;
+    overflow-x: auto;
 }
 
 
 .margTabla{
-    padding: 120px;
+    padding: 20px;
     margin-bottom:auto;
 }
 
@@ -47,6 +55,8 @@
     border-spacing: 0;
     border: 2px solid #000; 
     font-family: 'Courier New', Courier, monospace;
+    width: 100%;
+    table-layout: auto;
     @font-face {
         font-family: 'fuente';
         src: url(/static/fuente/Callingstone.ttf);
@@ -56,10 +66,16 @@
 
 #tablar td, #tablar th {
     border: 1px solid #000; 
+    padding: 8px;
+    text-align: center; 
 }
 
-#tablar td, #tablar th {
-    text-align: center; 
+#formwhite{
+    color: white;
+}
+
+#h2form{
+    color: white;
 }
 
 #tablar tbody tr:nth-child(even) {

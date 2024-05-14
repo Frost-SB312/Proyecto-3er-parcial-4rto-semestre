@@ -6,6 +6,10 @@ app = Flask(__name__)
 @app.route('/')
 def home():
     return render_template("home.html")
+@app.route('/layout2')
+
+def layout2():
+    return render_template("layout2.html")
 
 @app.route('/area')
 def area():
@@ -686,7 +690,7 @@ def login():
         admin = cursor.fetchone()
 
     if admin:
-        return redirect(url_for('vacante_agregar'))
+        return redirect(url_for('layout2'))
         
     else:
         return "Acceso denegado. Por favor, verifica tu nombre de usuario y contraseña. <a href='/'>Volver al inicio</a>"
@@ -703,6 +707,13 @@ def registrovacan():
 #Inicio del módulo de contratación
 
 #CRUD Vacantes
+@app.route('/vacante2')
+def vacante2():
+    conn = pymysql.connect(host='localhost', user='root', passwd='', db='rh3' )
+    cursor = conn.cursor()
+    cursor.execute('select idVacante, conseVR, fuenteCandidato, inicioFechaPublic, finFechaPublic, publicada, observaciones, candidatoSelecc, fechaContratacion, idRequisicion, idPuesto from vacante order by idVacante')
+    datos = cursor.fetchall()
+    return render_template("vacantes2.html",pue2 = datos)
 @app.route('/vacante')
 def vacante():
     conn = pymysql.connect(host='localhost', user='root', passwd='', db='rh3' )
@@ -721,21 +732,23 @@ def vacante_editar(id):
 
 @app.route('/vacante_fedita/<string:id>',methods=['POST'])
 def vacante_fedita(id):
+    conn = pymysql.connect(host='localhost', user='root', passwd='', db='rh3')
+    cursor = conn.cursor()
     if request.method == 'POST':
-        conse=request.form['conseVR']
         fuente=request.form['fuenteCandidato']
         fechai=request.form['inicioFechaPublic']
         fechaf=request.form['finFechaPublic']
         publi=request.form['publicada']
         obser=request.form['observaciones']
-        candi=request.form['observaciones']
+        candi=request.form['candidatoSelecc']
         fechac=request.form['fechaContratacion']
         requi=request.form['idRequisicion']
         puesto=request.form['idPuesto']
-
+        cursor.execute('select idVacante from vacante where observaciones=%s', (obser))
+        id=cursor.fetchone()
         conn = pymysql.connect(host='localhost', user='root', passwd='', db='rh3')
         cursor = conn.cursor()
-        cursor.execute('update vacante set conseVR=%s, fuenteCandidato=%s, inicioFechaPublic=%s, finFechaPublic=%s, publicada=%s, observaciones=%s, candidatoSelecc=%s, fechaContratacion=%s, idRequisicion=%s, idPuesto=%s where idVacante=%s', (conse, fuente, fechai, fechaf, publi, obser, candi, fechac,requi,puesto, id))
+        cursor.execute('update vacante set fuenteCandidato=%s, inicioFechaPublic=%s, finFechaPublic=%s, publicada=%s, observaciones=%s, candidatoSelecc=%s, fechaContratacion=%s, idRequisicion=%s, idPuesto=%s where idVacante=%s', (fuente, fechai, fechaf, publi, obser, candi, fechac,requi,puesto, id))
         conn.commit()
     return redirect(url_for('vacante'))
 
@@ -745,19 +758,19 @@ def vacante_borrar(id):
     cursor = conn.cursor()
     cursor.execute('delete from vacante where idVacante = {0}'.format(id))
     conn.commit()
-    return redirect(url_for('vacantes'))
+    return redirect(url_for('vacante'))
 
 @app.route('/vacante_agregar')
 def vacante_agregar():
     conn = pymysql.connect(host='localhost', user='root', passwd='', db='rh3')
     cursor = conn.cursor()
-    cursor.execute('SELECT DISTINCT descripcion FROM mediopublic')  
+    cursor.execute('SELECT DISTINCT descripcion FROM publi')  
     opciones_publicada = [row[0] for row in cursor.fetchall()] 
-    cursor.execute('SELECT DISTINCT CONCAT(idCandidato, " - ", nombre) FROM candidato')  
+    cursor.execute('SELECT DISTINCT nombre FROM candidato')  
     opciones_publicada2 = [row[0] for row in cursor.fetchall()]  
-    cursor.execute('SELECT DISTINCT CONCAT(idRequisicion, " - ", tipoVacante) FROM requisicion')  
+    cursor.execute('SELECT DISTINCT idRequisicion FROM requisicion')  
     opciones_publicada3 = [row[0] for row in cursor.fetchall()]  
-    cursor.execute('SELECT DISTINCT CONCAT(idPuesto, " - ", nomPuesto) FROM puesto')  
+    cursor.execute('SELECT DISTINCT nomPuesto FROM puesto')  
     opciones_publicada4 = [row[0] for row in cursor.fetchall()]  
     conn.close()
     return render_template("vacantes_agr.html", opciones_publicada=opciones_publicada,opciones_publicada2=opciones_publicada2,opciones_publicada3=opciones_publicada3,opciones_publicada4=opciones_publicada4)
@@ -768,21 +781,28 @@ def vacante_fagrega():
     conn = pymysql.connect(host='localhost', user='root', passwd='', db='rh3' )
     cursor = conn.cursor()
     publi2=0
+    candi2=0
+    puesto2=0
     if request.method == 'POST':
         fuente=request.form['fuenteCandidato']
         fechai=request.form['inicioFechaPublic']
         fechaf=request.form['finFechaPublic']
         publi=request.form['publicada']
-        if publi=='Convocatoria en áreas estratégicas de la empresa':
+        if publi=='Publicada':
             publi2==1
+        else:
+            publi2==2
         obser=request.form['observaciones']
         candi=request.form['candidatoSelecc']
+        cursor.execute('select idCandidato from candidato where nombre=%s', (candi))
+        candi2=cursor.fetchone()
         fechac=request.form['fechaContratacion']
         requi=request.form['idRequisicion']
         puesto=request.form['idPuesto']
-
-        cursor.execute('insert into vacante (fuenteCandidato, inicioFechaPublic, finFechaPublic, publicada, observaciones, candidatoSelecc, fechaContratacion, idRequisicion, idPuesto) values (%s,%s,%s,%s,%s,%s,%s,%s,%s)',( fuente, fechai, fechaf, publi2, obser, candi, fechac,requi,puesto))
+        cursor.execute('select idPuesto from puesto where nomPuesto=%s', (puesto))
+        puesto2=cursor.fetchone()
+        cursor.execute('insert into vacante (fuenteCandidato, inicioFechaPublic, finFechaPublic, publicada, observaciones, candidatoSelecc, fechaContratacion, idRequisicion, idPuesto) values (%s,%s,%s,%s,%s,%s,%s,%s,%s)',( fuente, fechai, fechaf, publi2, obser, candi2, fechac,requi,puesto2))
         conn.commit()
-    return redirect(url_for('vacantes'))
+    return redirect(url_for('vacante'))
 if __name__ == "__main__":
     app.run(debug=True)

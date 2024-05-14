@@ -534,3 +534,11 @@ INSERT INTO `admins` (`nombre`,`contraseña`) values
 ('Diego Samuel Aguila Duron','456'),
 ('Ramiro Trujillo Ramirez','789');
 
+CREATE TABLE IF NOT EXISTS `publi`(
+`idp` int(2) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+`descripcion` varchar(50) NOT NULL
+);
+
+INSERT INTO `publi` (`descripcion`) values
+('Publicada'),
+('No Publicada');

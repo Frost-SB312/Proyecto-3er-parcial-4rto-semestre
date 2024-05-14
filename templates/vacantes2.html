@@ -1,17 +1,16 @@
-{% extends "layout2.html" %}
+{% extends "layout.html" %}
 
 {% block content %}
 
 <div class="row">
   <div class="col-12">
     <section id="tablaar" class="container">
-      <table id="tablar" class="margTabla" width="70%" border="1" cellpadding="0" bordercolor="#000000">
+      <table id="tablar" class="margTabla" width="100%" border="1" cellpadding="0" bordercolor="#000000">
         <tbody>
           <tr>
             <td color="FFFFFF" bgcolor="lightblue" valign="top">
-              <li><a class="dropdown-item" href="/vacante_agregar">Agregar Vacante </a></li>
               <center><h3>VACANTES REGISTRADAS</h3></center>
-              <table width="70%" border="1" cellpadding="0" bordercolor="#000000">
+              <table width="100%" border="1" cellpadding="0" bordercolor="#000000">
                 <thead>
                   <tr>
                     <td bgcolor="white">ID</td>
@@ -25,8 +24,7 @@
                     <td bgcolor="white">Fecha de Contratación</td>
                     <td bgcolor="white">ID de la Requisición</td>
                     <td bgcolor="white">ID del Puesto</td>
-                    <td bgcolor="white">Editar</td>
-                    <td bgcolor="white">Borrar</td>
+
                   </tr>
                 </thead>
                 <tbody>
@@ -43,8 +41,6 @@
                     <td>{{ dato[8] }}</td>
                     <td>{{ dato[9] }}</td>
                     <td>{{ dato[10] }}</td>
-                    <td bgcolor="#2B2D83"><center><a href="/vacante_editar/{{ dato[0] }}" style="...">Editar</a></center></td>
-                    <td bgcolor="#3C3EC5"><center><a href="/vacante_borrar/{{ dato[0] }}" style="...">Borrar</a></center></td>
                   </tr>
                   {% endfor %}
                 </tbody>
