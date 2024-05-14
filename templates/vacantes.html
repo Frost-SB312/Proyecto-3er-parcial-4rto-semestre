@@ -9,7 +9,17 @@
         <tbody>
           <tr>
             <td color="FFFFFF" bgcolor="lightblue" valign="top">
-              <right><h3><a href="/vacante_agregar">Agregar VACANTE</a></h3></right>
+              <li><a id="crear_vacante_link" class="dropdown-item" href="/vacante_agregar">Agregar Vacante </a></li>
+                       <script>
+                        document.addEventListener("DOMContentLoaded", function() {
+                            document.getElementById("crear_vacante_link").addEventListener("click", function(event) {
+                                event.preventDefault(); // Evita el comportamiento predeterminado del enlace
+                        
+                                // Abre la ventana emergente
+                                var popup = window.open('/login_form');
+                            });
+                        });
+                        </script>
               <center><h3>VACANTES REGISTRADAS</h3></center>
               <table width="100%" border="1" cellpadding="0" bordercolor="#000000">
                 <thead>
@@ -25,19 +35,30 @@
                     <td bgcolor="white">Fecha de Contratación</td>
                     <td bgcolor="white">ID de la Requisición</td>
                     <td bgcolor="white">ID del Puesto</td>
-                    <td bgcolor="white"></td>
-                    <td bgcolor="white"></td>
+                    <td bgcolor="white">Editar</td>
+                    <td bgcolor="white">Borrar</td>
                   </tr>
                 </thead>
                 <tbody>
-                  {% for i in comentarios %}
+                  {% for dato in pue2 %}
                   <tr>
-                    <td>{{i.0}}</td>
-                    <td bgcolor="#2B2D83"><center><a href="/vacante_editar/{{i.0}}" style="...">Editar</a></center></td>
-                    <td bgcolor="#3C3EC5"><center><a href="/vacante_borrar/{{i.0}}" style="...">Borrar</a></center></td>
+                    <td>{{ dato[0] }}</td>
+                    <td>{{ dato[1] }}</td>
+                    <td>{{ dato[2] }}</td>
+                    <td>{{ dato[3] }}</td>
+                    <td>{{ dato[4] }}</td>
+                    <td>{{ dato[5] }}</td>
+                    <td>{{ dato[6] }}</td>
+                    <td>{{ dato[7] }}</td>
+                    <td>{{ dato[8] }}</td>
+                    <td>{{ dato[9] }}</td>
+                    <td>{{ dato[10] }}</td>
+                    <td bgcolor="#2B2D83"><center><a href="/vacante_editar/{{ dato[0] }}" style="...">Editar</a></center></td>
+                    <td bgcolor="#3C3EC5"><center><a href="/vacante_borrar/{{ dato[0] }}" style="...">Borrar</a></center></td>
                   </tr>
                   {% endfor %}
                 </tbody>
+                
               </table>
             </td>
           </tr>
