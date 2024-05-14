@@ -2,8 +2,11 @@
 
 {% block content %}
 <body>
-    <h2>Iniciar sesión</h2>
-    <form action="/login" method="POST">
+<div class="row">
+    <div class="col-12">
+        <section id="tablaar" class="container">
+    <h2 id="h2form">Iniciar sesión</h2>
+    <form id="formwhite" action="/login" method="POST">
         <label for="nombre">Nombre:</label><br>
         <input type="text" id="nombre" name="nombre"><br>
         <label for="contraseña">Contraseña:</label><br>
@@ -11,5 +14,8 @@
         <input type="submit" value="Iniciar sesión">
         
     </form>
+        </section>
+    </div>
+</div>
 </body>
 {% endblock %}
