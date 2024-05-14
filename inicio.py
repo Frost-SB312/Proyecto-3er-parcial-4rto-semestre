@@ -13,6 +13,7 @@ def area():
     cursor = conn.cursor()
     cursor.execute('select idArea, descripcion from area order by idArea')
     datos = cursor.fetchall()
+    global idarea
     return render_template("area.html", comentarios = datos)
 
 
