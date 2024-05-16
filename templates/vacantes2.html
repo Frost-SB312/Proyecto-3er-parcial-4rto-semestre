@@ -25,6 +25,7 @@
                     <td bgcolor="white">ID de la Requisición</td>
                     <td bgcolor="white">ID del Puesto</td>
 
+
                   </tr>
                 </thead>
                 <tbody>
@@ -40,7 +41,9 @@
                     <td>{{ dato[7] }}</td>
                     <td>{{ dato[8] }}</td>
                     <td>{{ dato[9] }}</td>
-                    <td>{{ dato[10] }}</td>
+                    <td>{{ dato[10] }}</td>                    
+                    <td bgcolor="#2B2D83"><center><a href="/registrar/{{ dato[0] }}" style="...">Registrarse</a></center></td>
+
                   </tr>
                   {% endfor %}
                 </tbody>

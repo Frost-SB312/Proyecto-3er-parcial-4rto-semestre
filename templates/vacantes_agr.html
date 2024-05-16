@@ -23,7 +23,7 @@
                         <div class="col-xs-12 ">
                             <div class="mb-3">
                                 <label for="inicioFechaPublic" class="form-label">Inicio de la fecha de publicación</label>
-                                <input type="text" class="form-control" name="inicioFechaPublic" id="inicioFechaPublic"></input>
+                                <input type="date" class="form-control" name="inicioFechaPublic" id="inicioFechaPublic"></input>
                             </div>
                         </div>
                     </div>
@@ -31,23 +31,16 @@
                         <div class="col-xs-12 ">
                             <div class="mb-3">
                                 <label for="finFechaPublic" class="form-label">Fin de la fecha de publicación</label>
-                                <input type="text" class="form-control" name="finFechaPublic" id="finFechaPublic"></input>
+                                <input type="date" class="form-control" name="finFechaPublic" id="finFechaPublic"></input>
                             </div>
                         </div>
                     </div>
-                    <!--<div class="form-row">
-                        <div class="col-xs-12 ">
-                            <div class="mb-3">
-                                <label for="publicada" class="form-label">Publicada</label>
-                                <input type="text" class="form-control" name="publicada" id="publicada"></input>
-                            </div>
-                        </div>
-                    </div>-->
                     <div class="form-row">
                         <div class="col-xs-12">
                             <div class="mb-3">
                                 <label for="publicada" class="form-label">Publicada</label>
                                 <select class="form-control" name="publicada" id="publicada">
+                                    <option  selected="true" disabled="disabled">Elige...</option>
                                     {% for dato in opciones_publicada %}
                                         <option value="{{ dato }}">{{ dato }}</option>
                                     {% endfor %}
@@ -68,6 +61,7 @@
                             <div class="mb-3">
                                 <label for="candidatoSelecc" class="form-label">Candidato Seleccionado</label>
                                 <select class="form-control" name="candidatoSelecc" id="candidatoSelecc">
+                                    <option  selected="true" disabled="disabled">Elige...</option>
                                     {% for opcion in opciones_publicada2 %}
                                         <option value="{{ opcion }}">{{ opcion }}</option>
                                     {% endfor %}
@@ -79,31 +73,17 @@
                         <div class="col-xs-12 ">
                             <div class="mb-3">
                                 <label for="fechaContratacion" class="form-label">Fecha de Contratacion</label>
-                                <input type="text" class="form-control" name="fechaContratacion" id="fechaContratacion"></input>
+                                <input type="date" class="form-control" name="fechaContratacion" id="fechaContratacion"></input>
                             </div>
                         </div>
                     </div>
-                    <!--<div class="form-row">
-                        <div class="col-xs-12 ">
-                            <div class="mb-3">
-                                <label for="idRequisicion" class="form-label">ID de la Requisicion</label>
-                                <input type="text" class="form-control" name="idRequisicion" id="idRequisicion"></input>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="col-xs-12 ">
-                            <div class="mb-3">
-                                <label for="idPuesto" class="form-label">ID del Puesto</label>
-                                <input type="text" class="form-control" name="idPuesto" id="idPuesto"></input>
-                            </div>
-                        </div>
-                    </div>-->
+                    
                     <div class="form-row">
                         <div class="col-xs-12">
                             <div class="mb-3">
                                 <label for="idRequisicion" class="form-label">ID de la Requisicion</label>
                                 <select class="form-control" name="idRequisicion" id="idRequisicion">
+                                    <option  selected="true" disabled="disabled">Elige...</option>
                                     {% for opcion in opciones_publicada3 %}
                                         <option value="{{ opcion }}">{{ opcion }}</option>
                                     {% endfor %}
@@ -116,6 +96,7 @@
                             <div class="mb-3">
                                 <label for="idPuesto" class="form-label">ID del Puesto</label>
                                 <select class="form-control" name="idPuesto" id="idPuesto">
+                                    <option  selected="true" disabled="disabled">Elige...</option>
                                     {% for opcion in opciones_publicada4 %}
                                         <option value="{{ opcion }}">{{ opcion }}</option>
                                     {% endfor %}
