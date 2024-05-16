@@ -714,6 +714,7 @@ def vacante2():
     cursor.execute('select idVacante, conseVR, fuenteCandidato, inicioFechaPublic, finFechaPublic, publicada, observaciones, candidatoSelecc, fechaContratacion, idRequisicion, idPuesto from vacante order by idVacante')
     datos = cursor.fetchall()
     return render_template("vacantes2.html",pue2 = datos)
+
 @app.route('/vacante')
 def vacante():
     conn = pymysql.connect(host='localhost', user='root', passwd='', db='rh3' )
@@ -744,7 +745,7 @@ def vacante_fedita(id):
         fechac=request.form['fechaContratacion']
         requi=request.form['idRequisicion']
         puesto=request.form['idPuesto']
-        cursor.execute('select idVacante from vacante where observaciones=%s', (obser))
+        cursor.execute('select idVacante from vacante where idVacante=%s', (id))
         id=cursor.fetchone()
         conn = pymysql.connect(host='localhost', user='root', passwd='', db='rh3')
         cursor = conn.cursor()
@@ -804,5 +805,64 @@ def vacante_fagrega():
         cursor.execute('insert into vacante (fuenteCandidato, inicioFechaPublic, finFechaPublic, publicada, observaciones, candidatoSelecc, fechaContratacion, idRequisicion, idPuesto) values (%s,%s,%s,%s,%s,%s,%s,%s,%s)',( fuente, fechai, fechaf, publi2, obser, candi2, fechac,requi,puesto2))
         conn.commit()
     return redirect(url_for('vacante'))
+
+#CRUD candidatos
+
+@app.route('/candidatos')
+def candidatos():
+    conn = pymysql.connect(host='localhost', user='root', passwd='', db='rh3' )
+    cursor = conn.cursor()
+    cursor.execute('select idCandidato, idVacante, idRequisicion, idPuesto, CURP, RFC, nombre, domCalle, domNumExtInt, domColonia, tel1, tel2, correoE, edad, sexo, idEstadoCivil idEscolaridad, idGradoAvance, idCarrera, entrevSelecReq, entrevSelecPresen, entrevSelecresult, evalMedicaReq, evalMedicaPresen, evalMedicaResult, evalPsicolgReq, evalPsicologPresen, evalPsicologResult, evalPsicometReq, evalPsicometPresene, evalPsicometResult, evalTecnicaReq, evalTecnicaPresen, evalPsicometResult, evalConocReq, evalConocPresen, evalConocResult, entrevFinalReq, entrevFinalPresen, entrevFinalResul from candidato order by idCandidato')
+    datos = cursor.fetchall()
+    return render_template("candidatos.html",pue2 = datos)
+
+@app.route('/candidatos_editar/<string:id>')
+def candidatos_editar(id):
+    conn = pymysql.connect(host='localhost', user='root', passwd='', db='rh3')
+    cursor = conn.cursor()
+    cursor.execute('select idCandidato, CURP, RFC, nombre, domCalle, domNumExtInt, domColonia, tel1, tel2, correoE, edad, sexo, idEstadoCivil idEscolaridad, idGradoAvance, idCarrera, entrevSelecReq, entrevSelecPresen, entrevSelecresult, evalMedicaReq, evalMedicaPresen, evalMedicaResult, evalPsicolgReq, evalPsicolgPresen, evalPsicolgResult, evalPsicometReq, evalPsicometPresene, evalPsicometResult, evalTecnicaReq, evalTecnicaPresen, evalPsicometResult, evalConocReq, evalConocPresen, evalConocResult, entrevFinalReq, entrevFinalPresen, entrevFinalResul where idCandidato= %s', (id))
+    dato  = cursor.fetchall()
+    return render_template("vacantes_edi.html", comentar=dato[0])
+
+@app.route('/candidatos_fedita/<string:id>',methods=['POST'])
+def candidatos_fedita(id):
+    conn = pymysql.connect(host='localhost', user='root', passwd='', db='rh3')
+    cursor = conn.cursor()
+    if request.method == 'POST':
+        fuente=request.form['fuenteCandidato']
+        fechai=request.form['inicioFechaPublic']
+        fechaf=request.form['finFechaPublic']
+        publi=request.form['publicada']
+        obser=request.form['observaciones']
+        candi=request.form['candidatoSelecc']
+        fechac=request.form['fechaContratacion']
+        requi=request.form['idRequisicion']
+        puesto=request.form['idPuesto']
+        cursor.execute('select idVacante from vacante where idCandidato=%s', (id))
+        id=cursor.fetchone()
+        conn = pymysql.connect(host='localhost', user='root', passwd='', db='rh3')
+        cursor = conn.cursor()
+        cursor.execute('update vacante set fuenteCandidato=%s, inicioFechaPublic=%s, finFechaPublic=%s, publicada=%s, observaciones=%s, candidatoSelecc=%s, fechaContratacion=%s, idRequisicion=%s, idPuesto=%s where idVacante=%s', (fuente, fechai, fechaf, publi, obser, candi, fechac,requi,puesto, id))
+        conn.commit()
+    return redirect(url_for('vacante'))
+
+@app.route('/candidatos_borrar/<string:id>')
+def candidatos_borrar(id):
+    conn = pymysql.connect(host='localhost', user='root', passwd='', db='rh3')
+    cursor = conn.cursor()
+    cursor.execute('delete from candidato where idCandidato = {0}'.format(id))
+    conn.commit()
+    return redirect(url_for('vacante'))
+
+@app.route('/aprobar/<string:id>')
+def aprobar_candidato(id):
+    conn = pymysql.connect(host='localhost', user='root', passwd='', db='rh3')
+    cursor = conn.cursor()
+    cursor.execute('select idVacante from candidato where idCandidato=%s', (id))
+    vacante=cursor.fetchone()
+    cursor.execute('upadate vacante set candidatoSelecc=%s where idVacante=%s', (id,vacante))
+    conn.commit()
+    return redirect(url_for('vacante'))
+
 if __name__ == "__main__":
     app.run(debug=True)

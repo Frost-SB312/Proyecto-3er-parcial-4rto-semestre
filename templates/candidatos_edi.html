@@ -1,0 +1,101 @@
+{% extends "layout2.html" %}
+
+{% block content %}
+<div class="row">
+      <div class="col-12">
+          <section id="tablaar" class="container">
+            <form id="formwhite" action="/candidatos_fedita/{{comentar.0}}" method="post">
+            <div class="container">
+                  <div class="form-row">
+                        <div class="col-xs-12 ">
+                        <div class="mb-3">
+                              <label for="CURP" class="form-label">CURP</label>
+                              <input type="text" class="form-control" name="CURP" id="CURP" placeholder="CURP" value="{{comentar.1}}">
+                        </div>
+
+                        </div>
+                  </div>
+                  <div class="form-row">
+                        <div class="col-xs-12 ">
+                        <div class="mb-3">
+                              <label for="RFC" class="form-label">RFC</label>
+                              <input type="text" class="form-control" name="RFC" id="RFC" placeholder="RFC" value="{{comentar.2}}">
+                        </div>
+
+                        </div>
+                  </div>
+                  <div class="form-row">
+                        <div class="col-xs-12 ">
+                        <div class="mb-3">
+                              <label for="nombre" class="form-label">Nombre</label>
+                              <input type="text" class="form-control" name="nombre" id="nombre" placeholder="nombre" value="{{comentar.3}}">
+                        </div>
+
+                        </div>
+                  </div>
+                  <div class="form-row">
+                        <div class="col-xs-12 ">
+                        <div class="mb-3">
+                              <label for="domCalle" class="form-label">Calle del Domicilio</label>
+                              <input type="text" class="form-control" name="domCAlle" id="domCalle" placeholder="Calle del Domicilio" value="{{comentar.4}}">
+                        </div>
+
+                        </div>
+                  </div>
+                  <div class="form-row">
+                        <div class="col-xs-12 ">
+                              <div class="mb-3">
+                                    <label for="domNumExtInt" class="form-label">Número exterior e interior del domicilio</label>
+                                    <input type="text" class="form-control" name="domNumExtInt" id="domNumExtInt" placeholder="Número exterior e interior del domicilio" value="{{comentar.5}}">
+                              </div>
+                        </div>
+                  </div>
+                  <div class="form-row">
+                        <div class="col-xs-12 ">
+                              <div class="mb-3">
+                                    <label for="domColonia" class="form-label">Colonia del Domicilio</label>
+                                    <input type="text" class="form-control" name="domColonia" id="domColonia" placeholder="Colonia del Domicilio" value="{{comentar.6}}">
+                              </div>
+                        </div>
+                  </div>
+                  <div class="form-row">
+                        <div class="col-xs-12 ">
+                              <div class="mb-3">
+                                    <label for="tel1" class="form-label">Teléfono 1</label>
+                                    <input type="number" class="form-control" name="tel1" id="tel1" placeholder="Teléfono 1" value="{{comentar.7}}">
+                              </div>
+                        </div>
+                  </div>
+                  <div class="form-row">
+                        <div class="col-xs-12 ">
+                              <div class="mb-3">
+                                    <label for="tel2" class="form-label">Teléfono 2</label>
+                                    <input type="number" class="form-control" name="tel2" id="tel2" placeholder="Teléfono 2" value="{{comentar.8}}">
+                              </div>
+                        </div>
+                  </div>
+                  <div class="form-row">
+                        <div class="col-xs-12 ">
+                              <div class="mb-3">
+                                    <label for="correoE" class="form-label">Correo Electrónico</label>
+                                    <input type="text" class="form-control" name="correoE" id="correoE" placeholder="Correo Electrónico" value="{{comentar.9}}">
+                              </div>
+                        </div>
+                  </div>
+                  <div class="form-row">
+                        <div class="col-xs-12 ">
+                              <div class="mb-3">
+                                    <label for="edad" class="form-label">Edad</label>
+                                    <input type="number" class="form-control" name="edad" id="edad" placeholder="Edad" value="{{comentar.10}}">
+                              </div>
+                        </div>
+                  </div>
+            </div>
+                  <button type="submit" class="btn btn-primary">Actualizar</button>
+            </form>
+      </section>
+</div>
+</div>
+
+
+{% endblock %}
