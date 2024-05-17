@@ -886,10 +886,20 @@ def aprobar_candidato(id):
     cursor = conn.cursor()
     cursor.execute('select idVacante from candidato where idCandidato=%s', (id))
     vacante=cursor.fetchone()
-    cursor.execute('upadate vacante set candidatoSelecc=%s where idVacante=%s', (id,vacante))
+    cursor.execute('update vacante set candidatoSelecc=%s where idVacante=%s', (id,vacante[0]))
     conn.commit()
     return redirect(url_for('vacante'))
 
+@app.route('/rechazar/<string:id>')
+def rechazar_candidato(id):
+    conn = pymysql.connect(host='localhost', user='root', passwd='', db='rh3')
+    cursor = conn.cursor()
+    cursor.execute('select nombre from candidato where idCandidato=%s', (id))
+    nombre=cursor.fetchone()
+    cursor.execute('insert into candidatosR(nombre) values(%s)', (nombre))
+    cursor.execute('delete from candidato where idCandidato = {0}'.format(id))
+    conn.commit()
+    return redirect(url_for('candidatos'))
 
 #Registro candidato
 @app.route('/registrar/<string:id>')
