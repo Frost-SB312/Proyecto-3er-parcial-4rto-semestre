@@ -36,10 +36,9 @@
     align-content: center;
     box-shadow: 16px 14px 20px #001aff8c;
     position:relative;
-    overflow: hidden;
-    justify-content: center;
     align-items: center;
     display: flex;
+    overflow-x: auto;
 }
 
 .navbar-toggler{
