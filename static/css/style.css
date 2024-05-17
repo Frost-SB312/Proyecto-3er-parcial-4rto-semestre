@@ -35,12 +35,9 @@
     text-align: center;
     align-content: center;
     box-shadow: 16px 14px 20px #001aff8c;
-    position:relative;
     overflow-x:auto;
-    justify-content:center;
     align-items:center;
     display:flex;
-    overflow-x:auto;
 }
 
 .navbar-toggler{
