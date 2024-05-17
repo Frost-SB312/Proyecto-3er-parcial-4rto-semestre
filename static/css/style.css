@@ -36,14 +36,11 @@
     align-content: center;
     box-shadow: 16px 14px 20px #001aff8c;
     position:relative;
-<<<<<<< HEAD
-=======
     overflow-x:auto;
-    justify-content: center;
->>>>>>> 436c47705d66aca8ada61e803e74b872ba73609b
-    align-items: center;
-    display: flex;
-    overflow-x: auto;
+    justify-content:center;
+    align-items:center;
+    display:flex;
+    overflow-x:auto;
 }
 
 .navbar-toggler{
