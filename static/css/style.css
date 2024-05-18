@@ -33,12 +33,22 @@
     border-color:#010052;
     border-radius: 20px;
     text-align: center;
-    align-content: center;
     box-shadow: 16px 14px 20px #001aff8c;
     overflow-x:auto;
-    align-items:center;
-    display:flex;
 }
+
+#tablaar2{
+    color: #ffffff;
+    padding-block: 20px;
+    background-color: rgba(0, 0, 0, 0.7);
+    border-color:#010052;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 16px 14px 20px #001aff8c;
+    overflow-x:auto;
+}
+
+
 
 .navbar-toggler{
     color: white;
@@ -94,6 +104,10 @@
     
 }
 
+#tdx{
+ background-color: #ffffff;
+}
+
 #tablar td, #tablar th {
     border: 1px solid #000; 
     padding: 8px;
@@ -112,7 +126,16 @@
     background-color: #f2f2f2; 
 }
 
-
+#detalles{
+    display: none;
+    padding-block: 20px;
+    background-color: rgba(0, 0, 0, 0.7);
+    border-color:#010052;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 16px 14px 20px #001aff8c;
+    overflow-x:auto;
+}
 
 body{
     margin:0;
