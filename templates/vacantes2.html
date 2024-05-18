@@ -29,7 +29,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                  {% for dato in pue2 %}
+                  {% for dato in comentarios %}
                   <tr>
                     <td>{{ dato[0] }}</td>
                     <td>{{ dato[1] }}</td>
@@ -42,7 +42,7 @@
                     <td>{{ dato[8] }}</td>
                     <td>{{ dato[9] }}</td>
                     <td>{{ dato[10] }}</td>                    
-                    <td bgcolor="#2B2D83"><center><a href="/registrar/{{ dato[0] }}" style="...">Registrarse</a></center></td>
+                    <td bgcolor="#2B2D83"><center><a href="/registrar/{{ dato[0] }}">Registrarse</a></center></td>
 
                   </tr>
                   {% endfor %}

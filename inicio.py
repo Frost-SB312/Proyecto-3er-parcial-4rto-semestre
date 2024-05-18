@@ -9,7 +9,7 @@ def home():
 
 @app.route('/layout2')
 def layout2():
-    return render_template("layout2.html")
+    return render_template("home2.html")
 
 
 @app.route('/area')
@@ -20,6 +20,15 @@ def area():
     datos = cursor.fetchall()
     global idarea
     return render_template("area.html", comentarios = datos)
+
+@app.route('/area2')
+def area2():
+    conn = pymysql.connect(host='localhost', user='root', passwd='', db='rh3' )
+    cursor = conn.cursor()
+    cursor.execute('select idArea, descripcion from area order by idArea')
+    datos = cursor.fetchall()
+    global idarea
+    return render_template("area2.html", comentarios = datos)
 
 @app.route('/area_editar/<string:id>')
 def area_editar(id):
@@ -380,6 +389,14 @@ def carrera():
     datos = cursor.fetchall()
     return render_template("carrera.html", comentarios = datos)
 
+@app.route('/carrera2')
+def carrera2():
+    conn = pymysql.connect(host='localhost', user='root', passwd='', db='rh3' )
+    cursor = conn.cursor()
+    cursor.execute('select idCarrera, descripcion from carrera order by idCarrera')
+    datos = cursor.fetchall()
+    return render_template("carrera2.html", comentarios = datos)
+
 @app.route('/carrera_editar/<string:id>')
 def carrera_editar(id):
     conn = pymysql.connect(host='localhost', user='root', passwd='', db='rh3')
@@ -429,6 +446,14 @@ def escolaridad():
     cursor.execute('select idEscolaridad, descripcion from escolaridad order by idEscolaridad')
     datos = cursor.fetchall()
     return render_template("escolaridad.html", comentarios = datos)
+
+@app.route('/escolaridad2')
+def escolaridad2():
+    conn = pymysql.connect(host='localhost', user='root', passwd='', db='rh3' )
+    cursor = conn.cursor()
+    cursor.execute('select idEscolaridad, descripcion from escolaridad order by idEscolaridad')
+    datos = cursor.fetchall()
+    return render_template("escolaridad2.html", comentarios = datos)
 
 @app.route('/escolaridad_editar/<string:id>')
 def escolaridad_editar(id):
@@ -480,6 +505,14 @@ def estado_civil():
     datos = cursor.fetchall()
     return render_template("estado_civil.html", comentarios = datos)
 
+@app.route('/estado_civil2')
+def estado_civil2():
+    conn = pymysql.connect(host='localhost', user='root', passwd='', db='rh3' )
+    cursor = conn.cursor()
+    cursor.execute('select idEstadoCivil, descripcion from estado_civil order by idEstadoCivil')
+    datos = cursor.fetchall()
+    return render_template("estado_civil2.html", comentarios = datos)
+
 @app.route('/estado_civil_editar/<string:id>')
 def estado_civil_editar(id):
     conn = pymysql.connect(host='localhost', user='root', passwd='', db='rh3')
@@ -529,6 +562,14 @@ def grado_avance():
     cursor.execute('select idGradoAvance, descripcion from grado_avance order by idGradoAvance')
     datos = cursor.fetchall()
     return render_template("grado_avance.html", comentarios = datos)
+
+@app.route('/grado_avance2')
+def grado_avance2():
+    conn = pymysql.connect(host='localhost', user='root', passwd='', db='rh3' )
+    cursor = conn.cursor()
+    cursor.execute('select idGradoAvance, descripcion from grado_avance order by idGradoAvance')
+    datos = cursor.fetchall()
+    return render_template("grado_avance2.html", comentarios = datos)
 
 @app.route('/grado_avance_editar/<string:id>')
 def grado_avance_editar(id):
@@ -580,6 +621,14 @@ def habilidad():
     datos = cursor.fetchall()
     return render_template("habilidad.html", comentarios = datos)
 
+@app.route('/habilidad2')
+def habilidad2():
+    conn = pymysql.connect(host='localhost', user='root', passwd='', db='rh3' )
+    cursor = conn.cursor()
+    cursor.execute('select idHabilidad, descripcion from habilidad order by idHabilidad')
+    datos = cursor.fetchall()
+    return render_template("habilidad2.html", comentarios = datos)
+
 @app.route('/habilidad_editar/<string:id>')
 def habilidad_editar(id):
     conn = pymysql.connect(host='localhost', user='root', passwd='', db='rh3')
@@ -629,6 +678,14 @@ def idioma():
     cursor.execute('select idIdioma, descripcion from idioma order by idIdioma')
     datos = cursor.fetchall()
     return render_template("idioma.html", comentarios = datos)
+
+@app.route('/idioma2')
+def idioma2():
+    conn = pymysql.connect(host='localhost', user='root', passwd='', db='rh3' )
+    cursor = conn.cursor()
+    cursor.execute('select idIdioma, descripcion from idioma order by idIdioma')
+    datos = cursor.fetchall()
+    return render_template("idioma2.html", comentarios = datos)
 
 @app.route('/idioma_editar/<string:id>')
 def idioma_editar(id):
@@ -700,7 +757,7 @@ def vacante2():
         cursor = conn.cursor()
         cursor.execute('select idVacante, conseVR, fuenteCandidato, inicioFechaPublic, finFechaPublic, publicada, observaciones, candidatoSelecc, fechaContratacion, idRequisicion, idPuesto from vacante order by idVacante')
         datos=cursor.fetchall()
-        return render_template("vacantes2.html", pue2=datos)
+        return render_template("vacantes2.html", comentarios=datos)
 
 @app.route('/vacante')
 def vacante():

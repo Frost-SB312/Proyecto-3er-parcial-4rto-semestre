@@ -170,9 +170,9 @@
            var isChecked = document.getElementById('i1').checked;
              if ( {{idio.0}}>1 && isChecked ) {
                   document.getElementById('i{{idio.0}}').disabled=true;
-                  document.getElementById('i{{idio.0}}').checked=false; }
-             else
-                 { document.getElementById('i{{idio.0}}').disabled=false;}
+                  document.getElementById('i{{idio.0}}').checked=false; 
+               }else{
+                 { document.getElementById('i{{idio.0}}').disabled=false;}}
 
            {% endfor %}
             }
